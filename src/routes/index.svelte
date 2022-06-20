@@ -4,6 +4,9 @@
     import Cabecalho from '$lib/components/Cabecalho.svelte';
     import MinhaLista from '$lib/components/MinhaLista.svelte';
     import Titulo from '$lib/components/Titulo.svelte';
+
+    import categorias from '$lib/json/categorias.json';
+    import Categoria from '$lib/components/Categoria.svelte';
 </script>
 
 <svelte:head>
@@ -19,6 +22,23 @@
 
             <div class="divisoria"></div>
         </div>
+
+        <main>
+            <Titulo tag='h1'>Ingredientes</Titulo>
+
+            <div class="info">
+                <p>Selecione abaixo os ingredientes que você deseja usar nesta refeição:</p>
+                <p>*Atenção: consideramos que você tenha em casa sal, pimenta e água.</p>
+            </div>
+
+            <ul class="categorias">
+                {#each categorias as categoria (categoria.nome)}
+                    <li>
+                        <Categoria {categoria} />
+                    </li>
+                {/each}
+            </ul>
+        </main>
     </div>
 </div>
 
@@ -52,5 +72,14 @@
  
     .info > p {
         line-height: 2rem;
+    }
+    
+    .categorias {
+        margin-bottom: 4.6875rem;
+ 
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
     }
 </style>
